@@ -19,7 +19,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, " %s!", r.URL.Path[1:])
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func queryParams(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	Type :=  r.URL.Query().Get("type")
 	a := r.URL.Query().Get("a")
 	b := r.URL.Query().Get("b")
